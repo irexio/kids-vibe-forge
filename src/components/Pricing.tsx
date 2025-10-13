@@ -8,7 +8,7 @@ const plans = [
     price: "$0",
     description: "Perfect for getting started",
     features: [
-      "Access to starter ebooks",
+      "Access to ebook companions",
       "Basic coding tutorials",
       "Community access",
       "Code snippets library",
