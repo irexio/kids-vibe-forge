@@ -52,6 +52,7 @@ const Footer = () => {
         
         <div className="border-t border-border pt-8 text-center text-muted-foreground">
           <p>&copy; 2025 KidsVibeCodingClub. All rights reserved.</p>
+          <p className="mt-2 text-sm">Vibe Coded via Lovable</p>
         </div>
       </div>
     </footer>
