@@ -20,7 +20,7 @@ const features = [
   {
     icon: Users,
     title: "Community Support",
-    description: "Join a vibrant community of young coders. Share projects, get help, and inspire others.",
+    description: "Connect with other young coders. Share projects, get help, and inspire others.",
   },
 ];
 
