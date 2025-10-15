@@ -1,4 +1,4 @@
-import { Code2, Github, Twitter, Youtube } from "lucide-react";
+import { Code2, Github, Youtube } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -37,9 +37,6 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Connect</h3>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
                 <Github className="w-5 h-5" />
               </a>
