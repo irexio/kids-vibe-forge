@@ -18,7 +18,7 @@ const plans = [
   },
   {
     name: "Premium",
-    price: "$9.99",
+    price: "$14.99",
     period: "/month",
     description: "Unlock your full coding potential",
     features: [
