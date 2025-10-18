@@ -1,4 +1,4 @@
-import { BookOpen, Sparkles, Brain, Puzzle, Lightbulb, Users } from "lucide-react";
+import { BookOpen, Sparkles, Brain, Zap, GraduationCap, FolderKanban, Users, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Features = () => {
@@ -38,6 +38,50 @@ const Features = () => {
               <p className="text-muted-foreground leading-relaxed">
                 Start with your favorite Chapter Challenge, try a new Mini-Vibe, or jump into the Community to exchange ideas and feedback.
               </p>
+              
+              <div className="space-y-3 mt-6">
+                <h4 className="font-semibold text-foreground mb-3">Discover:</h4>
+                
+                <div className="flex gap-3">
+                  <Zap className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground">Mini-Vibes</p>
+                    <p className="text-sm text-muted-foreground">"Remix Mode" — advanced prompts, editable templates, new challenges.</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3">
+                  <GraduationCap className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground">Tutorials</p>
+                    <p className="text-sm text-muted-foreground">Expanded tutorials tied directly to Companion Book chapters, with deeper explanations and bonus "Code Labs."</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3">
+                  <FolderKanban className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground">Projects</p>
+                    <p className="text-sm text-muted-foreground">Unlockable "Book Missions" that connect to each chapter's challenge (like building the full game or app).</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3">
+                  <Users className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground">Community</p>
+                    <p className="text-sm text-muted-foreground">A private Companion Clubhouse for members who've read the book — they can share deeper builds and swap remix ideas.</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3">
+                  <FileText className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground">Resources</p>
+                    <p className="text-sm text-muted-foreground">Downloadable "Companion Assets" — flowcharts, pro prompt examples, code snippets from the book.</p>
+                  </div>
+                </div>
+              </div>
               
               <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mt-6">
                 <div className="flex gap-2">
@@ -85,18 +129,26 @@ const Features = () => {
                 <h4 className="font-semibold text-foreground mb-3">Discover:</h4>
                 
                 <div className="flex gap-3">
-                  <Puzzle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <Zap className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-foreground">Mini-Vibes</p>
-                    <p className="text-sm text-muted-foreground">Fast, beginner-friendly projects that teach real coding logic.</p>
+                    <p className="text-sm text-muted-foreground">Quick, visual wins — 5-10 minute "wow moments."</p>
                   </div>
                 </div>
                 
                 <div className="flex gap-3">
-                  <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <GraduationCap className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-foreground">Tutorials</p>
-                    <p className="text-sm text-muted-foreground">Step-by-step lessons that explain how code works.</p>
+                    <p className="text-sm text-muted-foreground">Intro series: loops, logic, patterns — short, self-contained.</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3">
+                  <FolderKanban className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground">Projects</p>
+                    <p className="text-sm text-muted-foreground">Guided projects that teach the basics.</p>
                   </div>
                 </div>
                 
@@ -104,7 +156,15 @@ const Features = () => {
                   <Users className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-foreground">Community</p>
-                    <p className="text-sm text-muted-foreground">A safe, positive space to share your projects and ask questions.</p>
+                    <p className="text-sm text-muted-foreground">Open threads for questions, sharing first wins.</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3">
+                  <FileText className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground">Resources</p>
+                    <p className="text-sm text-muted-foreground">Learn about Vibe Coding, prompts, safety.</p>
                   </div>
                 </div>
               </div>
