@@ -9,7 +9,7 @@ const tools = [
   {
     name: "Scratch",
     icon: Code2,
-    description: "A visual programming language from MIT where you snap code blocks together like puzzle pieces. Perfect for beginners — create games, animations, and interactive stories with no typing required!",
+    description: "The world's largest coding community for children and a coding language with a simple visual interface. Create digital stories, games, and animations by snapping code blocks together. Developed by the Scratch Foundation to promote computational thinking, creativity, and collaboration.",
     link: "https://scratch.mit.edu/",
     bestFor: "Beginners (Ages 8-16)",
   },
