@@ -1,6 +1,7 @@
-import { Sparkles, Code2, Zap, GitBranch, Bot } from "lucide-react";
+import { Sparkles, Code2, Zap, GitBranch, Bot, MessageSquare, ShieldAlert } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
@@ -42,13 +43,37 @@ const tools = [
   },
 ];
 
+const aiHelpers = [
+  {
+    name: "ChatGPT",
+    icon: MessageSquare,
+    description: "OpenAI's conversational AI assistant. Ask questions, get code explanations, debug problems, and learn programming concepts through conversation.",
+    link: "https://chat.openai.com",
+    bestFor: "All Levels",
+  },
+  {
+    name: "Gemini",
+    icon: Sparkles,
+    description: "Google's advanced AI assistant. Get help with coding questions, project ideas, and learning new concepts. Great for research and problem-solving.",
+    link: "https://gemini.google.com",
+    bestFor: "All Levels",
+  },
+  {
+    name: "Claude",
+    icon: Bot,
+    description: "Anthropic's helpful AI assistant. Excellent for code review, detailed explanations, and learning best practices. Great for understanding complex topics.",
+    link: "https://claude.ai",
+    bestFor: "All Levels",
+  },
+];
+
 const Tools = () => {
   return (
     <main className="min-h-screen">
       <Navigation />
       <section className="py-24 px-4 mt-16">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Popular Vibe Coding Tools
             </h1>
@@ -56,38 +81,99 @@ const Tools = () => {
               Discover the best AI-powered tools to supercharge your coding journey
             </p>
           </div>
+
+          <Alert className="max-w-4xl mx-auto mb-12 border-primary bg-primary/5">
+            <ShieldAlert className="h-5 w-5 text-primary" />
+            <AlertTitle className="text-lg font-semibold">Premium Members Only</AlertTitle>
+            <AlertDescription className="text-base leading-relaxed">
+              Access to these tools requires a Premium membership. This ensures adult authorization and parental permission for young coders. Premium members also get exclusive tutorials and support for using these tools safely and effectively.
+            </AlertDescription>
+          </Alert>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {tools.map((tool, index) => {
-              const Icon = tool.icon;
-              return (
-                <Card key={index} className="border-border bg-card hover:border-primary/50 transition-all">
-                  <CardHeader>
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="p-2 bg-primary/10 rounded-lg">
-                        <Icon className="w-6 h-6 text-primary" />
+          <div>
+            <h2 className="text-3xl font-bold mb-8 text-center">Coding Development Tools</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+              {tools.map((tool, index) => {
+                const Icon = tool.icon;
+                return (
+                  <Card key={index} className="border-border bg-card hover:border-primary/50 transition-all">
+                    <CardHeader>
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                          <Icon className="w-6 h-6 text-primary" />
+                        </div>
+                        <CardTitle className="text-xl">{tool.name}</CardTitle>
                       </div>
-                      <CardTitle className="text-xl">{tool.name}</CardTitle>
-                    </div>
-                    <CardDescription className="text-sm text-muted-foreground">
-                      Best for: {tool.bestFor}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground leading-relaxed">
-                      {tool.description}
-                    </p>
-                    <Button 
-                      variant="outline" 
-                      className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                      onClick={() => window.open(tool.link, '_blank')}
-                    >
-                      Learn More →
-                    </Button>
-                  </CardContent>
-                </Card>
-              );
-            })}
+                      <CardDescription className="text-sm text-muted-foreground">
+                        Best for: {tool.bestFor}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-muted-foreground leading-relaxed">
+                        {tool.description}
+                      </p>
+                      <Button 
+                        variant="outline" 
+                        className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                        onClick={() => window.open(tool.link, '_blank')}
+                      >
+                        Learn More →
+                      </Button>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-20">
+            <h2 className="text-3xl font-bold mb-4 text-center">AI Helpers</h2>
+            <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Conversational AI assistants to help you learn, code, and solve problems
+            </p>
+            
+            <Alert className="max-w-4xl mx-auto mb-8 border-amber-500 bg-amber-500/10">
+              <ShieldAlert className="h-5 w-5 text-amber-500" />
+              <AlertTitle className="text-lg font-semibold text-amber-600 dark:text-amber-500">
+                ⚠️ Parental Permission Required
+              </AlertTitle>
+              <AlertDescription className="text-base leading-relaxed">
+                <strong>Young coders under 18 must have parental or guardian permission to use these AI tools.</strong> These are powerful learning assistants, but they collect data and require responsible use. Parents should review each tool's terms of service and privacy policy before granting access.
+              </AlertDescription>
+            </Alert>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {aiHelpers.map((tool, index) => {
+                const Icon = tool.icon;
+                return (
+                  <Card key={index} className="border-border bg-card hover:border-primary/50 transition-all">
+                    <CardHeader>
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                          <Icon className="w-6 h-6 text-primary" />
+                        </div>
+                        <CardTitle className="text-xl">{tool.name}</CardTitle>
+                      </div>
+                      <CardDescription className="text-sm text-muted-foreground">
+                        Best for: {tool.bestFor}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-muted-foreground leading-relaxed">
+                        {tool.description}
+                      </p>
+                      <Button 
+                        variant="outline" 
+                        className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                        onClick={() => window.open(tool.link, '_blank')}
+                      >
+                        Learn More →
+                      </Button>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
           
           <div className="mt-16 max-w-3xl mx-auto bg-primary/10 border border-primary/20 rounded-lg p-8">
