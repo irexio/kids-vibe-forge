@@ -1,26 +1,31 @@
-import { BookOpen, Zap, Trophy, Users } from "lucide-react";
+import { BookOpen, Zap, Trophy, Users, Gamepad2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const features = [
   {
     icon: BookOpen,
     title: "Interactive Ebooks",
-    description: "Engaging content designed specifically for tweens with real-world coding projects and challenges.",
+    description: "Engaging lessons designed just for tweens and teens. Learn through stories, visuals, and real code challenges.",
   },
   {
     icon: Zap,
     title: "Learn by Doing",
-    description: "Hands-on projects that make coding fun and practical. Build real apps while learning.",
+    description: "Hands-on projects that make coding practical and fun. Each tutorial connects what kids imagine to what they build.",
   },
   {
     icon: Trophy,
     title: "Track Progress",
-    description: "Celebrate achievements and milestones as you master new coding concepts and skills.",
+    description: "Celebrate milestones and achievements as your child masters new coding concepts.",
   },
   {
     icon: Users,
     title: "Community Support",
-    description: "Connect with other young coders. Share projects, get help, and inspire others.",
+    description: "Connect with other young coders and families in a safe, moderated space. Share projects, ask questions, and celebrate progress together.",
+  },
+  {
+    icon: Gamepad2,
+    title: "Real Projects",
+    description: "From beginner Scratch builds to full app prototypes, our guided projects help kids create something they can show off.",
   },
 ];
 
@@ -33,11 +38,11 @@ const Features = () => {
             Why Choose KidsVibeCodingClub?
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to start your coding journey
+            Everything your child needs to start their coding journey — all in one fun, creative space.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <Card 
               key={index} 
