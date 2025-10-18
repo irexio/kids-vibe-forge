@@ -7,6 +7,13 @@ import Footer from "@/components/Footer";
 
 const tools = [
   {
+    name: "Scratch",
+    icon: Code2,
+    description: "A visual programming language from MIT where you snap code blocks together like puzzle pieces. Perfect for beginners — create games, animations, and interactive stories with no typing required!",
+    link: "https://scratch.mit.edu/",
+    bestFor: "Beginners (Ages 8-16)",
+  },
+  {
     name: "Lovable",
     icon: Sparkles,
     description: "Build full-stack applications with AI. Chat with AI to create beautiful, functional web apps instantly. Perfect for learning by building real projects.",
