@@ -24,6 +24,9 @@ const Navigation = () => {
             <a href="/getting-started" className="text-foreground hover:text-primary transition-colors">
               Getting Started
             </a>
+            <a href="/tools" className="text-foreground hover:text-primary transition-colors">
+              Tools
+            </a>
           </div>
           
           <div className="flex items-center gap-4">
