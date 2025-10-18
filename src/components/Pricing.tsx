@@ -9,7 +9,7 @@ const plans = [
     description: "Perfect for getting started",
     features: [
       "Access to ebook companions",
-      "Basic coding tutorials",
+      "Basic video tutorials (coming soon)",
       "Code snippets library",
     ],
     cta: "Start Free",
@@ -23,7 +23,7 @@ const plans = [
     features: [
       "All free features",
       "Complete ebook library",
-      "Premium video tutorials",
+      "Premium video tutorials (coming soon)",
       "Interactive coding challenges",
       "Priority community support",
       "Downloadable project files",
