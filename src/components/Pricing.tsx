@@ -49,42 +49,45 @@ const Pricing = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {plans.map((plan, index) => (
             <Card 
               key={index} 
               className={`relative border-border ${
-                plan.popular ? 'border-primary shadow-[var(--shadow-glow)] scale-105' : ''
+                plan.popular ? 'border-primary shadow-[var(--shadow-glow)] scale-105' : 'border-primary'
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold">
                   Most Popular
                 </div>
               )}
               
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl mb-2">{plan.name}</CardTitle>
-                <CardDescription className="text-base">{plan.description}</CardDescription>
-                <div className="mt-4">
-                  <span className="text-5xl font-bold">{plan.price}</span>
-                  {plan.period && <span className="text-muted-foreground">{plan.period}</span>}
+              <CardHeader className="text-center pb-4">
+                <CardTitle className="text-xl mb-1">{plan.name}</CardTitle>
+                <CardDescription className="text-sm">{plan.description}</CardDescription>
+                <div className="mt-3">
+                  <span className="text-3xl font-bold">{plan.price}</span>
+                  {plan.period && <span className="text-muted-foreground text-sm">{plan.period}</span>}
                 </div>
               </CardHeader>
               
-              <CardContent>
-                <ul className="space-y-3">
+              <CardContent className="py-3">
+                <ul className="space-y-2">
                   {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                      <span>{feature}</span>
+                    <li key={featureIndex} className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span className="text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </CardContent>
               
-              <CardFooter>
-                <Button variant={plan.variant} className="w-full" size="lg">
+              <CardFooter className="pt-4">
+                <Button 
+                  variant={plan.popular ? "hero" : "outline"} 
+                  className={plan.popular ? "w-full" : "w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"}
+                >
                   {plan.cta}
                 </Button>
               </CardFooter>
