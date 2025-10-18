@@ -6,13 +6,14 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Code2 className="w-6 h-6 text-primary" />
-              <span className="font-bold text-lg">KidsVibeCodingClub</span>
-            </div>
-            <p className="text-muted-foreground">
-              Where imagination meets code.
-            </p>
+            <h3 className="font-semibold mb-4">Navigate</h3>
+            <ul className="space-y-2 text-muted-foreground">
+              <li><a href="/#features" className="hover:text-primary transition-colors">Features</a></li>
+              <li><a href="/#pricing" className="hover:text-primary transition-colors">Pricing</a></li>
+              <li><a href="/#about" className="hover:text-primary transition-colors">About</a></li>
+              <li><a href="/getting-started" className="hover:text-primary transition-colors">Getting Started</a></li>
+              <li><a href="/tools" className="hover:text-primary transition-colors">Tools</a></li>
+            </ul>
           </div>
           
           <div>
