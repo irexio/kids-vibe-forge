@@ -7,13 +7,6 @@ import Footer from "@/components/Footer";
 
 const tools = [
   {
-    name: "Scratch",
-    icon: Code2,
-    description: "The world's largest coding community for children and a coding language with a simple visual interface. Create digital stories, games, and animations by snapping code blocks together. Developed by the Scratch Foundation to promote computational thinking, creativity, and collaboration.",
-    link: "https://scratch.mit.edu/",
-    bestFor: "Beginners (Ages 8-16)",
-  },
-  {
     name: "Lovable",
     icon: Sparkles,
     description: "Build full-stack applications with AI. Chat with AI to create beautiful, functional web apps instantly. Perfect for learning by building real projects.",
@@ -47,6 +40,13 @@ const tools = [
     description: "AI-powered code editor built for pair programming with AI. Chat with your codebase, make changes with natural language, and learn faster.",
     link: "https://cursor.sh",
     bestFor: "Intermediate to Advanced",
+  },
+  {
+    name: "Scratch",
+    icon: Code2,
+    description: "The world's largest coding community for children and a coding language with a simple visual interface. Create digital stories, games, and animations by snapping code blocks together. Developed by the Scratch Foundation to promote computational thinking, creativity, and collaboration.",
+    link: "https://scratch.mit.edu/",
+    bestFor: "Beginners (Ages 8-16)",
   },
 ];
 
