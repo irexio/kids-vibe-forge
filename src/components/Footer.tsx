@@ -23,6 +23,7 @@ const Footer = () => {
               <li><a href="#" className="hover:text-primary transition-colors">Ebooks</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Tutorials</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Projects</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Glossary</a></li>
             </ul>
           </div>
           
