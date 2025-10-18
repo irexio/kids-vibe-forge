@@ -10,7 +10,6 @@ const plans = [
     features: [
       "Access to ebook companions",
       "Basic coding tutorials",
-      "Community access",
       "Code snippets library",
     ],
     cta: "Start Free",
