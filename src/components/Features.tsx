@@ -172,6 +172,24 @@ const Features = () => {
               <p className="text-muted-foreground leading-relaxed italic mt-6">
                 Every coder starts somewhere — and this is your moment to begin. Let curiosity lead, and see what you can create!
               </p>
+              
+              <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 mt-6">
+                <h4 className="text-lg font-semibold text-foreground mb-3">
+                  👉 Get the Vibe Coding for Kids Companion Book
+                </h4>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Our book, <span className="font-semibold text-foreground">Vibe Coding for Kids — A Quick Start Guide</span>, provides the solid foundation for everything you're learning here. It helps you build the right habits, understand how AI-driven code works, and develop the skills you'll need for lasting success.
+                </p>
+                <p className="text-foreground font-semibold mb-3">
+                  Start strong. Learn the right way.
+                </p>
+                <a 
+                  href="#" 
+                  className="inline-flex items-center text-primary hover:text-primary/80 font-semibold transition-colors"
+                >
+                  Get the Book →
+                </a>
+              </div>
             </CardContent>
           </Card>
         </div>
