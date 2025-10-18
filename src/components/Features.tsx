@@ -1,33 +1,5 @@
-import { BookOpen, Zap, Trophy, Users, Gamepad2 } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
-const features = [
-  {
-    icon: BookOpen,
-    title: "Interactive Ebooks",
-    description: "Engaging lessons designed just for tweens and teens. Learn through stories, visuals, and real code challenges.",
-  },
-  {
-    icon: Zap,
-    title: "Learn by Doing",
-    description: "Hands-on projects that make coding practical and fun. Each tutorial connects what kids imagine to what they build.",
-  },
-  {
-    icon: Trophy,
-    title: "Track Progress",
-    description: "Celebrate milestones and achievements as your child masters new coding concepts.",
-  },
-  {
-    icon: Users,
-    title: "Community Support",
-    description: "Connect with other young coders and families in a safe, moderated space. Share projects, ask questions, and celebrate progress together.",
-  },
-  {
-    icon: Gamepad2,
-    title: "Real Projects",
-    description: "From beginner Scratch builds to full app prototypes, our guided projects help kids create something they can show off.",
-  },
-];
+import { BookOpen, Sparkles, Brain, Puzzle, Lightbulb, Users } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Features = () => {
   return (
@@ -35,30 +7,113 @@ const Features = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Why Choose KidsVibeCodingClub?
+            Choose Your Path
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Everything your child needs to start their coding journey — all in one fun, creative space.
+            Whether you're continuing your journey or just getting started, we have the perfect path for you.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => (
-            <Card 
-              key={index} 
-              className="border-border bg-card hover:border-primary/50 transition-all hover:shadow-[var(--shadow-glow)] group"
-            >
-              <CardHeader>
-                <div className="mb-4">
-                  <feature.icon className="w-12 h-12 text-primary group-hover:text-accent transition-colors" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Option 1: Have the Book */}
+          <Card className="border-border bg-card hover:border-primary/50 transition-all">
+            <CardHeader>
+              <div className="flex items-center gap-3 mb-4">
+                <BookOpen className="w-10 h-10 text-primary" />
+                <CardTitle className="text-2xl">Option 1: "I Have Read the Companion Book"</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <h3 className="text-xl font-semibold mb-3">Welcome back, Vibe Coder!</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  You've already begun your journey through the Vibe Coding for Kids Companion Book — here you can build on your momentum, expand your knowledge, and connect with other creators who are learning just like you.
+                </p>
+              </div>
+              
+              <p className="text-muted-foreground leading-relaxed">
+                Explore hands-on tutorials and real projects that extend what you discovered in the book. Each section ties directly to your chapters and creative challenges — so you can practice, remix, and share your own versions online.
+              </p>
+              
+              <p className="text-muted-foreground leading-relaxed">
+                Start with your favorite Chapter Challenge, try a new Mini-Vibe, or jump into the Community to exchange ideas and feedback.
+              </p>
+              
+              <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mt-6">
+                <div className="flex gap-2">
+                  <Brain className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground mb-1">Tip:</p>
+                    <p className="text-sm text-muted-foreground">
+                      The more you explore, the more your creativity and confidence grow. Your book gave you the foundation — now the Club gives you the playground.
+                    </p>
+                  </div>
                 </div>
-                <CardTitle className="text-xl">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">{feature.description}</CardDescription>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Option 2: New to Vibe Coding */}
+          <Card className="border-border bg-card hover:border-primary/50 transition-all">
+            <CardHeader>
+              <div className="flex items-center gap-3 mb-4">
+                <Sparkles className="w-10 h-10 text-primary" />
+                <CardTitle className="text-2xl">Option 2: "I Am New to Vibe Coding & Kids Vibe Coding Club"</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <h3 className="text-xl font-semibold mb-3">Welcome — you're about to start coding the fun way!</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Here, you can gain confidence, explore your creativity, and join a friendly community that helps beginners start strong.
+                </p>
+              </div>
+              
+              <p className="text-muted-foreground leading-relaxed">
+                Vibe Coding uses AI to bring ideas to life — even if you've never written a single line of code before. You'll describe what you want to build, watch it come alive, and then learn how to understand and improve the code behind it.
+              </p>
+              
+              <p className="text-muted-foreground leading-relaxed">
+                To learn the right way, we highly recommend starting with the <span className="font-semibold text-foreground">Vibe Coding for Kids Companion Book</span>. It walks you through your first vibe-coded app step by step — helping you understand what the AI is doing, why it works, and how to make it your own.
+              </p>
+              
+              <p className="text-muted-foreground leading-relaxed">
+                We've built a Quick Start path just for you — filled with short, guided projects that make coding feel natural and exciting.
+              </p>
+              
+              <div className="space-y-3 mt-6">
+                <h4 className="font-semibold text-foreground mb-3">Discover:</h4>
+                
+                <div className="flex gap-3">
+                  <Puzzle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground">Mini-Vibes</p>
+                    <p className="text-sm text-muted-foreground">Fast, beginner-friendly projects that teach real coding logic.</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3">
+                  <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground">Tutorials</p>
+                    <p className="text-sm text-muted-foreground">Step-by-step lessons that explain how code works.</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3">
+                  <Users className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-foreground">Community</p>
+                    <p className="text-sm text-muted-foreground">A safe, positive space to share your projects and ask questions.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-muted-foreground leading-relaxed italic mt-6">
+                Every coder starts somewhere — and this is your moment to begin. Let curiosity lead, and see what you can create!
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
