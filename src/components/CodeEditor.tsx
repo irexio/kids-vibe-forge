@@ -8,15 +8,16 @@ interface CodeEditorProps {
 }
 
 const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
-  const [code, setCode] = useState(starterCode);
+  const [code, setCode] = useState<string>(starterCode ?? "");
   const [output, setOutput] = useState("");
   const [iframeSrc, setIframeSrc] = useState("");
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    setCode(starterCode);
+    const initial = starterCode ?? "";
+    setCode(initial);
     // Auto-run starter code on load
-    runCodeSafe(starterCode);
+    runCodeSafe(initial);
   }, [starterCode]);
 
   const runCodeSafe = (codeToRun: string) => {
@@ -35,8 +36,9 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
   };
 
   const resetCode = () => {
-    setCode(starterCode);
-    runCodeSafe(starterCode);
+    const initial = starterCode ?? "";
+    setCode(initial);
+    runCodeSafe(initial);
   };
 
   return (
@@ -57,7 +59,7 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
           </div>
         </div>
         <textarea
-          value={code}
+          value={code ?? ""}
           onChange={(e) => setCode(e.target.value)}
           className="flex-1 p-4 font-mono text-sm bg-background text-foreground resize-none focus:outline-none pointer-events-auto"
           spellCheck={false}
