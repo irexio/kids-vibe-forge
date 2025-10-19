@@ -40,11 +40,11 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[600px]">
+    <div className="h-full flex flex-col">
       {/* Code Editor */}
-      <div className="flex flex-col border border-border rounded-lg overflow-hidden bg-card">
+      <div className="flex-1 flex flex-col border-b border-border">
         <div className="bg-muted px-4 py-2 flex items-center justify-between border-b border-border">
-          <span className="text-sm font-semibold">Code Editor</span>
+          <span className="text-sm font-semibold">Type Your Code</span>
           <div className="flex gap-2">
             <Button size="sm" variant="outline" onClick={resetCode}>
               <RotateCcw className="w-4 h-4 mr-1" />
@@ -70,9 +70,9 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
       </div>
 
       {/* Output Preview */}
-      <div className="flex flex-col border border-border rounded-lg overflow-hidden bg-card">
+      <div className="flex-1 flex flex-col">
         <div className="bg-muted px-4 py-2 border-b border-border">
-          <span className="text-sm font-semibold">Live Preview</span>
+          <span className="text-sm font-semibold">Your Creation</span>
         </div>
         <iframe
           ref={iframeRef}

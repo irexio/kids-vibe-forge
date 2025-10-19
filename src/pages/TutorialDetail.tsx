@@ -7,8 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Lock, Sparkles, Crown } from "lucide-react";
+import { ArrowLeft, Lock, Sparkles, Crown, ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
 import ReactMarkdown from "react-markdown";
 
@@ -30,6 +29,8 @@ const TutorialDetail = () => {
   const [tutorial, setTutorial] = useState<Tutorial | null>(null);
   const [loading, setLoading] = useState(true);
   const [userRole, setUserRole] = useState<string>('free');
+  const [currentStep, setCurrentStep] = useState(0);
+  const [steps, setSteps] = useState<string[]>([]);
 
   useEffect(() => {
     fetchTutorial();
@@ -46,6 +47,11 @@ const TutorialDetail = () => {
 
       if (error) throw error;
       setTutorial(data);
+      
+      // Parse content into steps
+      const stepMatches = data.free_content.split(/(?=^##\s+Step\s+\d+:|^Step\s+\d+:)/m);
+      const parsedSteps = stepMatches.filter(step => step.trim().length > 0);
+      setSteps(parsedSteps);
     } catch (error) {
       console.error('Error fetching tutorial:', error);
       toast.error("Failed to load tutorial");
@@ -74,6 +80,18 @@ const TutorialDetail = () => {
   };
 
   const isPremiumUser = userRole === 'premium' || userRole === 'admin';
+
+  const handleNextStep = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const handlePreviousStep = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
 
   if (loading) {
     return (
@@ -134,79 +152,98 @@ const TutorialDetail = () => {
             <p className="text-xl text-muted-foreground">{tutorial.description}</p>
           </div>
 
-          <Tabs defaultValue="learn" className="space-y-6">
-            <TabsList>
-              <TabsTrigger value="learn">Learn</TabsTrigger>
-              <TabsTrigger value="code">Code Playground</TabsTrigger>
-              {tutorial.paid_content && (
-                <TabsTrigger value="levelup" disabled={!isPremiumUser}>
-                  <Crown className="w-4 h-4 mr-1" />
-                  Level Up
-                  {!isPremiumUser && <Lock className="w-3 h-3 ml-1" />}
-                </TabsTrigger>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Instructions Panel */}
+            <Card className="h-[600px] flex flex-col">
+              <CardHeader className="border-b">
+                <div className="flex items-center justify-between mb-2">
+                  <CardTitle>Instructions</CardTitle>
+                  <Badge variant="secondary">
+                    Step {currentStep + 1} of {steps.length}
+                  </Badge>
+                </div>
+                <CardDescription>Follow along step by step</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-1 overflow-auto p-6">
+                <div className="prose prose-sm max-w-none dark:prose-invert">
+                  <ReactMarkdown>{steps[currentStep] || tutorial.free_content}</ReactMarkdown>
+                </div>
+              </CardContent>
+              <div className="border-t p-4 flex justify-between items-center">
+                <Button
+                  variant="outline"
+                  onClick={handlePreviousStep}
+                  disabled={currentStep === 0}
+                >
+                  <ChevronLeft className="w-4 h-4 mr-1" />
+                  Previous
+                </Button>
+                <Button
+                  onClick={handleNextStep}
+                  disabled={currentStep === steps.length - 1}
+                >
+                  Next
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </Button>
+              </div>
+            </Card>
+
+            {/* Code Editor Panel */}
+            <Card className="h-[600px] flex flex-col">
+              <CardHeader className="border-b">
+                <CardTitle>Code Playground</CardTitle>
+                <CardDescription>Type your code and see it come to life!</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-1 p-0">
+                <CodeEditor starterCode={tutorial.starter_code} />
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Premium Content */}
+          {tutorial.paid_content && (
+            <Card className="mt-6">
+              {isPremiumUser ? (
+                <>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Crown className="w-5 h-5 text-primary" />
+                      Premium Enhancements
+                    </CardTitle>
+                    <CardDescription>
+                      Take your project to the next level with these advanced features
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="prose prose-sm max-w-none dark:prose-invert">
+                    <ReactMarkdown>{tutorial.paid_content}</ReactMarkdown>
+                  </CardContent>
+                </>
+              ) : (
+                <>
+                  <CardHeader>
+                    <CardTitle>🔒 Premium Content</CardTitle>
+                    <CardDescription>
+                      Upgrade to Vibe Creator Club to unlock advanced features!
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="mb-4">Get access to:</p>
+                    <ul className="list-disc list-inside space-y-2 mb-6">
+                      <li>Advanced animations and effects</li>
+                      <li>Interactive features and controls</li>
+                      <li>Custom image uploads</li>
+                      <li>Unlimited project saves</li>
+                      <li>Community gallery publishing</li>
+                    </ul>
+                    <Button onClick={() => navigate('/#pricing')}>
+                      <Crown className="w-4 h-4 mr-2" />
+                      Upgrade to Premium - $9.99/month
+                    </Button>
+                  </CardContent>
+                </>
               )}
-            </TabsList>
-
-            <TabsContent value="learn" className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Tutorial Instructions</CardTitle>
-                  <CardDescription>Follow these steps to build your project</CardDescription>
-                </CardHeader>
-                <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                  <ReactMarkdown>{tutorial.free_content}</ReactMarkdown>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="code">
-              <CodeEditor starterCode={tutorial.starter_code} />
-            </TabsContent>
-
-            {tutorial.paid_content && (
-              <TabsContent value="levelup">
-                {isPremiumUser ? (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Crown className="w-5 h-5 text-primary" />
-                        Premium Enhancements
-                      </CardTitle>
-                      <CardDescription>
-                        Take your project to the next level with these advanced features
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                      <ReactMarkdown>{tutorial.paid_content}</ReactMarkdown>
-                    </CardContent>
-                  </Card>
-                ) : (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>🔒 Premium Content</CardTitle>
-                      <CardDescription>
-                        Upgrade to Vibe Creator Club to unlock advanced features!
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="mb-4">Get access to:</p>
-                      <ul className="list-disc list-inside space-y-2 mb-6">
-                        <li>Advanced animations and effects</li>
-                        <li>Interactive features and controls</li>
-                        <li>Custom image uploads</li>
-                        <li>Unlimited project saves</li>
-                        <li>Community gallery publishing</li>
-                      </ul>
-                      <Button onClick={() => navigate('/#pricing')}>
-                        <Crown className="w-4 h-4 mr-2" />
-                        Upgrade to Premium - $9.99/month
-                      </Button>
-                    </CardContent>
-                  </Card>
-                )}
-              </TabsContent>
-            )}
-          </Tabs>
+            </Card>
+          )}
         </div>
       </section>
 
