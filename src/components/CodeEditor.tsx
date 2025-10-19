@@ -46,7 +46,7 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
       {/* Code Editor */}
       <div className="flex-1 flex flex-col border-b border-border relative z-10 overflow-hidden" style={{ pointerEvents: 'auto' }}>
         <div className="bg-muted px-4 py-2 flex items-center justify-between border-b border-border">
-          <span className="text-sm font-semibold">Type Your Code</span>
+          <span className="text-sm font-semibold">Type Your Code Below between &lt;script&gt; and &lt;/script&gt;</span>
           <div className="flex gap-2">
             <Button size="sm" variant="outline" onClick={resetCode}>
               <RotateCcw className="w-4 h-4 mr-1" />
