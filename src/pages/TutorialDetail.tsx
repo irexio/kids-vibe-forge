@@ -165,6 +165,17 @@ const TutorialDetail = () => {
                 <CardDescription>Follow along step by step</CardDescription>
               </CardHeader>
               <CardContent className="flex-1 overflow-auto p-6">
+                <div className="mb-6 p-4 bg-muted/50 rounded-lg border border-border">
+                  <p className="text-sm font-medium mb-3">
+                    Type your code exactly as shown below, pay close attention to uppercase and lowercase, and all other details and type it exactly.
+                  </p>
+                  <p className="text-sm font-medium">
+                    Be sure to type inside the "body" between:
+                  </p>
+                  <pre className="text-sm mt-2 p-2 bg-background rounded border border-border">
+                    {`<script>\n  Your Code Goes Here\n</script>`}
+                  </pre>
+                </div>
                 <div className="prose prose-sm max-w-none dark:prose-invert [&>h1]:mb-6 [&>h2]:mb-4 [&>h2]:mt-6 [&>h3]:mb-3 [&>h3]:mt-4 [&>p]:mb-4 [&>p]:leading-relaxed">
                   <ReactMarkdown>{steps[currentStep] || tutorial.free_content}</ReactMarkdown>
                 </div>
