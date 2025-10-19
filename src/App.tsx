@@ -9,7 +9,10 @@ import Tools from "./pages/Tools";
 import Glossary from "./pages/Glossary";
 import Auth from "./pages/Auth";
 import Community from "./pages/Community";
+import CommunityProjects from "./pages/CommunityProjects";
 import ShareProject from "./pages/ShareProject";
+import Forums from "./pages/Forums";
+import QA from "./pages/QA";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,7 +30,10 @@ const App = () => (
           <Route path="/glossary" element={<Glossary />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/community/projects" element={<CommunityProjects />} />
           <Route path="/share-project" element={<ShareProject />} />
+          <Route path="/forums" element={<Forums />} />
+          <Route path="/qa" element={<QA />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

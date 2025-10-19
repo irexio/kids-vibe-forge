@@ -5,225 +5,135 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Heart, MessageSquare, ExternalLink, Youtube } from "lucide-react";
-import { toast } from "sonner";
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  project_url: string | null;
-  youtube_url: string | null;
-  image_urls: string[];
-  tags: string[];
-  likes_count: number;
-  views_count: number;
-  created_at: string;
-  user_id: string;
-}
-
-interface Profile {
-  display_name: string | null;
-  username: string | null;
-}
+import { MessageSquare, HelpCircle, Image, Shield } from "lucide-react";
 
 const Community = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [profiles, setProfiles] = useState<Record<string, Profile>>({});
-  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
+  const [isModerator, setIsModerator] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check authentication
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
+      if (session?.user) {
+        checkModeratorStatus(session.user.id);
+      }
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      if (session?.user) {
+        checkModeratorStatus(session.user.id);
+      }
     });
 
     return () => subscription.unsubscribe();
   }, []);
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
+  const checkModeratorStatus = async (userId: string) => {
+    const { data } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId)
+      .in("role", ["moderator", "admin"]);
 
-  const fetchProjects = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("community_projects")
-        .select("*")
-        .eq("status", "approved")
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-      setProjects(data || []);
-
-      // Fetch profiles for these projects
-      if (data && data.length > 0) {
-        const userIds = [...new Set(data.map(p => p.user_id))];
-        const { data: profilesData } = await supabase
-          .from("profiles")
-          .select("id, display_name, username")
-          .in("id", userIds);
-
-        if (profilesData) {
-          const profilesMap: Record<string, Profile> = {};
-          profilesData.forEach(p => {
-            profilesMap[p.id] = {
-              display_name: p.display_name,
-              username: p.username
-            };
-          });
-          setProfiles(profilesMap);
-        }
-      }
-    } catch (error: any) {
-      toast.error("Failed to load projects");
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    setIsModerator((data || []).length > 0);
   };
 
-  const handleLike = async (projectId: string) => {
-    if (!user) {
-      toast.error("Please sign in to like projects");
-      navigate("/auth");
-      return;
+  const sections = [
+    {
+      title: "Projects Gallery",
+      description: "Share your coding projects and see what others are building!",
+      icon: <Image className="w-8 h-8 text-primary" />,
+      path: "/community/projects",
+      color: "bg-blue-500/10 border-blue-500/20"
+    },
+    {
+      title: "Forums",
+      description: "Discuss coding topics, share tips, and connect with the community",
+      icon: <MessageSquare className="w-8 h-8 text-primary" />,
+      path: "/forums",
+      color: "bg-purple-500/10 border-purple-500/20"
+    },
+    {
+      title: "Q&A",
+      description: "Ask coding questions and help others solve their challenges",
+      icon: <HelpCircle className="w-8 h-8 text-primary" />,
+      path: "/qa",
+      color: "bg-green-500/10 border-green-500/20"
     }
-
-    try {
-      const { error } = await supabase
-        .from("project_likes")
-        .insert({ project_id: projectId, user_id: user.id });
-
-      if (error) throw error;
-      toast.success("Project liked!");
-      fetchProjects();
-    } catch (error: any) {
-      if (error.code === "23505") {
-        toast.error("You already liked this project");
-      } else {
-        toast.error("Failed to like project");
-      }
-    }
-  };
+  ];
 
   return (
     <main className="min-h-screen">
       <Navigation />
       <section className="py-24 px-4 mt-16">
-        <div className="container mx-auto max-w-7xl">
-          <div className="flex justify-between items-center mb-12">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Community Projects
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                Check out what amazing things kids are building!
-              </p>
-            </div>
-            {user && (
-              <Button onClick={() => navigate("/share-project")} size="lg" variant="hero">
-                Share Your Project
-              </Button>
-            )}
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Community Hub
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Welcome to the KidsVibeCodingClub community! Connect, share, learn, and grow together.
+            </p>
           </div>
 
-          {loading ? (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">Loading projects...</p>
-            </div>
-          ) : projects.length === 0 ? (
-            <Card className="text-center py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {sections.map((section, idx) => (
+              <Card
+                key={idx}
+                className={`${section.color} hover:border-primary transition-all cursor-pointer`}
+                onClick={() => navigate(section.path)}
+              >
+                <CardHeader>
+                  <div className="flex justify-center mb-4">
+                    {section.icon}
+                  </div>
+                  <CardTitle className="text-2xl text-center">{section.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-center text-base">
+                    {section.description}
+                  </CardDescription>
+                  <div className="flex justify-center mt-6">
+                    <Button variant="outline">Explore</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {isModerator && (
+            <Card className="bg-primary/5 border-primary/20">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <Shield className="w-6 h-6 text-primary" />
+                  <CardTitle>Moderator Tools</CardTitle>
+                </div>
+              </CardHeader>
               <CardContent>
-                <p className="text-xl text-muted-foreground mb-4">
-                  No projects yet! Be the first to share.
+                <p className="text-muted-foreground mb-4">
+                  You have moderator access. Review pending content and manage reports.
                 </p>
-                {user && (
-                  <Button onClick={() => navigate("/share-project")} variant="hero">
-                    Share Your Project
-                  </Button>
-                )}
+                <Button onClick={() => navigate("/moderation")} variant="hero">
+                  Open Moderation Dashboard
+                </Button>
               </CardContent>
             </Card>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project) => (
-                <Card key={project.id} className="hover:border-primary/50 transition-all">
-                  <CardHeader>
-                    <div className="flex justify-between items-start mb-2">
-                      <CardTitle className="text-xl">{project.title}</CardTitle>
-                      {project.youtube_url && (
-                        <Youtube className="w-5 h-5 text-red-500" />
-                      )}
-                    </div>
-                    <CardDescription className="text-sm">
-                      by {profiles[project.user_id]?.display_name || profiles[project.user_id]?.username || "Anonymous"}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground line-clamp-3">
-                      {project.description}
-                    </p>
+          )}
 
-                    {project.tags && project.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag, idx) => (
-                          <Badge key={idx} variant="secondary">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <button
-                        onClick={() => handleLike(project.id)}
-                        className="flex items-center gap-1 hover:text-primary transition-colors"
-                      >
-                        <Heart className="w-4 h-4" />
-                        {project.likes_count}
-                      </button>
-                      <span className="flex items-center gap-1">
-                        <MessageSquare className="w-4 h-4" />
-                        0
-                      </span>
-                    </div>
-
-                    <div className="flex gap-2">
-                      {project.project_url && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex-1"
-                          onClick={() => window.open(project.project_url!, "_blank")}
-                        >
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          View Project
-                        </Button>
-                      )}
-                      {project.youtube_url && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex-1"
-                          onClick={() => window.open(project.youtube_url!, "_blank")}
-                        >
-                          <Youtube className="w-4 h-4 mr-2" />
-                          Watch Video
-                        </Button>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          {!user && (
+            <Card className="text-center mt-12">
+              <CardContent className="py-12">
+                <h3 className="text-2xl font-bold mb-4">Join Our Community!</h3>
+                <p className="text-muted-foreground mb-6">
+                  Sign in to share projects, ask questions, and connect with other young coders
+                </p>
+                <Button onClick={() => navigate("/auth")} variant="hero" size="lg">
+                  Sign In / Join Now
+                </Button>
+              </CardContent>
+            </Card>
           )}
         </div>
       </section>
