@@ -59,8 +59,10 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
         <textarea
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          className="flex-1 p-4 font-mono text-sm bg-background resize-none focus:outline-none"
+          className="flex-1 p-4 font-mono text-sm bg-background text-foreground resize-none focus:outline-none pointer-events-auto"
           spellCheck={false}
+          autoFocus
+          aria-label="Type your code here"
         />
         {output && (
           <div className="bg-destructive/10 text-destructive px-4 py-2 text-sm border-t border-border">

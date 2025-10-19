@@ -194,7 +194,7 @@ const TutorialDetail = () => {
                 <CardTitle>Code Playground</CardTitle>
                 <CardDescription>Type your code and see it come to life!</CardDescription>
               </CardHeader>
-              <CardContent className="flex-1 p-0">
+              <CardContent className="flex-1 p-0 min-h-0">
                 <CodeEditor starterCode={tutorial.starter_code} />
               </CardContent>
             </Card>
