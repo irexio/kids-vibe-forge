@@ -44,14 +44,11 @@ const Navigation = () => {
             <a href="/community" className="text-foreground hover:text-primary transition-colors">
               Community
             </a>
-            <a href="/#about" className="text-foreground hover:text-primary transition-colors">
+            <a href="/about" className="text-foreground hover:text-primary transition-colors">
               About
             </a>
             <a href="/getting-started" className="text-foreground hover:text-primary transition-colors">
               Getting Started
-            </a>
-            <a href="/tools" className="text-foreground hover:text-primary transition-colors">
-              Tools
             </a>
           </div>
           
