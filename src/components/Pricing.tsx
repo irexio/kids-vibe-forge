@@ -33,6 +33,7 @@ const plans = [
     cta: "Go Premium",
     variant: "hero" as const,
     popular: true,
+    annual: "$79/year (Save $40!)",
   },
 ];
 
@@ -70,6 +71,11 @@ const Pricing = () => {
                   <span className="text-3xl font-bold">{plan.price}</span>
                   {plan.period && <span className="text-muted-foreground text-sm">{plan.period}</span>}
                 </div>
+                {plan.annual && (
+                  <div className="mt-2 text-sm text-primary font-semibold">
+                    {plan.annual}
+                  </div>
+                )}
               </CardHeader>
               
               <CardContent className="py-3">

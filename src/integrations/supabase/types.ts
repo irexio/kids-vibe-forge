@@ -469,6 +469,57 @@ export type Database = {
         }
         Relationships: []
       }
+      tutorials: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string
+          difficulty: number
+          free_content: string
+          id: string
+          order_index: number | null
+          paid_content: string | null
+          preview_image: string | null
+          slug: string
+          starter_code: string | null
+          tier: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description: string
+          difficulty?: number
+          free_content: string
+          id?: string
+          order_index?: number | null
+          paid_content?: string | null
+          preview_image?: string | null
+          slug: string
+          starter_code?: string | null
+          tier?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string
+          difficulty?: number
+          free_content?: string
+          id?: string
+          order_index?: number | null
+          paid_content?: string | null
+          preview_image?: string | null
+          slug?: string
+          starter_code?: string | null
+          tier?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

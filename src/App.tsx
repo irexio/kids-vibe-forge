@@ -14,6 +14,8 @@ import CommunityProjects from "./pages/CommunityProjects";
 import ShareProject from "./pages/ShareProject";
 import Forums from "./pages/Forums";
 import QA from "./pages/QA";
+import Tutorials from "./pages/Tutorials";
+import TutorialDetail from "./pages/TutorialDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +38,8 @@ const App = () => (
           <Route path="/share-project" element={<ShareProject />} />
           <Route path="/forums" element={<Forums />} />
           <Route path="/qa" element={<QA />} />
+          <Route path="/tutorials" element={<Tutorials />} />
+          <Route path="/tutorials/:slug" element={<TutorialDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
