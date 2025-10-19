@@ -44,7 +44,7 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
   return (
     <div className="h-full flex flex-col" style={{ pointerEvents: 'auto' }}>
       {/* Code Editor */}
-      <div className="flex-1 flex flex-col border-b border-border" style={{ pointerEvents: 'auto' }}>
+      <div className="flex-1 flex flex-col border-b border-border relative z-10 overflow-hidden" style={{ pointerEvents: 'auto' }}>
         <div className="bg-muted px-4 py-2 flex items-center justify-between border-b border-border">
           <span className="text-sm font-semibold">Type Your Code</span>
           <div className="flex gap-2">
@@ -61,7 +61,9 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
         <textarea
           value={code ?? ""}
           onChange={(e) => setCode(e.target.value)}
-          className="flex-1 p-4 font-mono text-sm bg-background text-foreground resize-none focus:outline-none focus:ring-2 focus:ring-primary/20"
+          onMouseDown={(e) => { e.stopPropagation(); }}
+          onKeyDown={(e) => { e.stopPropagation(); }}
+          className="flex-1 p-4 font-mono text-sm bg-background text-foreground resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 relative z-10"
           spellCheck={false}
           autoFocus
           aria-label="Type your code here"
@@ -75,7 +77,7 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
       </div>
 
       {/* Output Preview */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col relative z-0" >
         <div className="bg-muted px-4 py-2 border-b border-border">
           <span className="text-sm font-semibold">Your Creation</span>
         </div>
