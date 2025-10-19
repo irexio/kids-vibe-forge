@@ -1,4 +1,4 @@
-import { Code2, Github, Youtube } from "lucide-react";
+import { Code2, Github, Youtube, Heart } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -50,7 +50,10 @@ const Footer = () => {
         
         <div className="border-t border-border pt-8 text-center text-muted-foreground">
           <p>&copy; 2025 KidsVibeCodingClub. All rights reserved.</p>
-          <p className="mt-2 text-sm">Vibe Coded via Lovable</p>
+          <p className="mt-2 text-sm flex items-center justify-center gap-2">
+            Vibe Coded via Lovable
+            <Heart className="w-4 h-4 text-primary fill-primary" />
+          </p>
         </div>
       </div>
     </footer>
