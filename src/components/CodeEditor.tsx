@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, RotateCcw } from "lucide-react";
 
@@ -10,35 +10,33 @@ interface CodeEditorProps {
 const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
   const [code, setCode] = useState(starterCode);
   const [output, setOutput] = useState("");
+  const [iframeSrc, setIframeSrc] = useState("");
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     setCode(starterCode);
+    // Auto-run starter code on load
+    runCodeSafe(starterCode);
   }, [starterCode]);
 
-  const runCode = () => {
+  const runCodeSafe = (codeToRun: string) => {
     try {
-      // Create a sandboxed iframe
-      const iframe = document.getElementById('code-output') as HTMLIFrameElement;
-      if (iframe && iframe.contentWindow) {
-        iframe.contentWindow.document.open();
-        iframe.contentWindow.document.write(code);
-        iframe.contentWindow.document.close();
-      }
+      // Use srcdoc instead of contentWindow for security
+      setIframeSrc(codeToRun);
       setOutput("");
-      onRun?.(code);
+      onRun?.(codeToRun);
     } catch (error) {
       setOutput(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   };
 
+  const runCode = () => {
+    runCodeSafe(code);
+  };
+
   const resetCode = () => {
     setCode(starterCode);
-    const iframe = document.getElementById('code-output') as HTMLIFrameElement;
-    if (iframe && iframe.contentWindow) {
-      iframe.contentWindow.document.open();
-      iframe.contentWindow.document.write(starterCode);
-      iframe.contentWindow.document.close();
-    }
+    runCodeSafe(starterCode);
   };
 
   return (
@@ -77,7 +75,8 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
           <span className="text-sm font-semibold">Live Preview</span>
         </div>
         <iframe
-          id="code-output"
+          ref={iframeRef}
+          srcDoc={iframeSrc}
           className="flex-1 bg-white"
           sandbox="allow-scripts"
           title="Code Output"
