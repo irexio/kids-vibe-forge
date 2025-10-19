@@ -9,6 +9,10 @@ const About = () => {
         </h2>
         
         <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+          <h3 className="text-2xl md:text-3xl font-bold text-foreground pb-4">
+            A Note to Parents
+          </h3>
+
           <p>
             In a world where technology never stops evolving, the way we learn to create with it has to evolve, too. You've found the perfect place for your child to start their creative coding journey in a fun, intuitive, and powerful new way. Welcome to the club!
           </p>
