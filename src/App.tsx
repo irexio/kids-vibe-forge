@@ -7,6 +7,9 @@ import Index from "./pages/Index";
 import GettingStarted from "./pages/GettingStarted";
 import Tools from "./pages/Tools";
 import Glossary from "./pages/Glossary";
+import Auth from "./pages/Auth";
+import Community from "./pages/Community";
+import ShareProject from "./pages/ShareProject";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +25,9 @@ const App = () => (
           <Route path="/getting-started" element={<GettingStarted />} />
           <Route path="/tools" element={<Tools />} />
           <Route path="/glossary" element={<Glossary />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/share-project" element={<ShareProject />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
