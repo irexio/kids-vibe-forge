@@ -165,7 +165,7 @@ const TutorialDetail = () => {
                 <CardDescription>Follow along step by step</CardDescription>
               </CardHeader>
               <CardContent className="flex-1 overflow-auto p-6">
-                <div className="prose prose-sm max-w-none dark:prose-invert">
+                <div className="prose prose-sm max-w-none dark:prose-invert [&>h1]:mb-6 [&>h2]:mb-4 [&>h2]:mt-6 [&>h3]:mb-3 [&>h3]:mt-4 [&>p]:mb-4 [&>p]:leading-relaxed">
                   <ReactMarkdown>{steps[currentStep] || tutorial.free_content}</ReactMarkdown>
                 </div>
               </CardContent>
