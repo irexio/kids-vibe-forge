@@ -23,13 +23,15 @@ const Features = () => {
             </p>
           </Card>
 
-          <Card className="border-border bg-card hover:border-primary/50 transition-all p-6">
-            <Zap className="w-12 h-12 text-primary mb-4" />
-            <h3 className="text-xl font-bold mb-3">Learn by Doing</h3>
-            <p className="text-muted-foreground">
-              Hands-on projects that make coding fun and practical. Build real apps while learning.
-            </p>
-          </Card>
+          <a href="/tutorials" className="block">
+            <Card className="border-border bg-card hover:border-primary hover:shadow-lg transition-all p-6 cursor-pointer">
+              <Zap className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-bold mb-3">Learn by Doing</h3>
+              <p className="text-muted-foreground">
+                Hands-on projects that make coding fun and practical. Build real apps while learning.
+              </p>
+            </Card>
+          </a>
 
           <Card className="border-border bg-card hover:border-primary/50 transition-all p-6">
             <Brain className="w-12 h-12 text-primary mb-4" />
