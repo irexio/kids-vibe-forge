@@ -61,13 +61,15 @@ const Features = () => {
             </p>
           </Card>
 
-          <Card className="border-border bg-card hover:border-primary/50 transition-all p-6">
-            <Users className="w-12 h-12 text-primary mb-4" />
-            <h3 className="text-xl font-bold mb-3">Community Support</h3>
-            <p className="text-muted-foreground">
-              Connect with other young coders. Share projects, get help, and inspire others.
-            </p>
-          </Card>
+          <a href="/community" className="block">
+            <Card className="border-border bg-card hover:border-primary hover:shadow-lg transition-all p-6 cursor-pointer">
+              <Users className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-bold mb-3">Community Support</h3>
+              <p className="text-muted-foreground">
+                Connect with other young coders. Share projects, get help, and inspire others.
+              </p>
+            </Card>
+          </a>
         </div>
       </div>
     </section>
