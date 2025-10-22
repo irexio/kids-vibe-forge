@@ -15,13 +15,15 @@ const Features = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          <Card className="border-border bg-card hover:border-primary/50 transition-all p-6">
-            <BookOpen className="w-12 h-12 text-primary mb-4" />
-            <h3 className="text-xl font-bold mb-3">Interactive Ebooks</h3>
-            <p className="text-muted-foreground">
-              Engaging content designed specifically for tweens with real-world coding projects and challenges.
-            </p>
-          </Card>
+          <a href="/learning-style" className="block">
+            <Card className="border-border bg-card hover:border-primary hover:shadow-lg transition-all p-6 cursor-pointer">
+              <Lightbulb className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-bold mb-3">Learning Style Quiz</h3>
+              <p className="text-muted-foreground">
+                Discover your unique learning style and get personalized coding tips that work for you.
+              </p>
+            </Card>
+          </a>
 
           <a href="/tutorials" className="block">
             <Card className="border-border bg-card hover:border-primary hover:shadow-lg transition-all p-6 cursor-pointer">
@@ -43,15 +45,13 @@ const Features = () => {
             </Card>
           </a>
 
-          <a href="/learning-style" className="block">
-            <Card className="border-border bg-card hover:border-primary hover:shadow-lg transition-all p-6 cursor-pointer">
-              <Lightbulb className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-bold mb-3">Learning Style Quiz</h3>
-              <p className="text-muted-foreground">
-                Discover your unique learning style and get personalized coding tips that work for you.
-              </p>
-            </Card>
-          </a>
+          <Card className="border-border bg-card hover:border-primary/50 transition-all p-6">
+            <BookOpen className="w-12 h-12 text-primary mb-4" />
+            <h3 className="text-xl font-bold mb-3">Interactive Ebooks</h3>
+            <p className="text-muted-foreground">
+              Engaging content designed specifically for tweens with real-world coding projects and challenges.
+            </p>
+          </Card>
 
           <Card className="border-border bg-card hover:border-primary/50 transition-all p-6">
             <Brain className="w-12 h-12 text-primary mb-4" />
