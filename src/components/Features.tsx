@@ -1,4 +1,4 @@
-import { BookOpen, Sparkles, Brain, Zap, GraduationCap, FolderKanban, Users, FileText } from "lucide-react";
+import { BookOpen, Sparkles, Brain, Zap, GraduationCap, FolderKanban, Users, FileText, Wrench } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Features = () => {
@@ -29,6 +29,16 @@ const Features = () => {
               <h3 className="text-xl font-bold mb-3">Learn by Doing</h3>
               <p className="text-muted-foreground">
                 Hands-on projects that make coding fun and practical. Build real apps while learning.
+              </p>
+            </Card>
+          </a>
+
+          <a href="/tools" className="block">
+            <Card className="border-border bg-card hover:border-primary hover:shadow-lg transition-all p-6 cursor-pointer">
+              <Wrench className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-bold mb-3">Vibe Coding Tools</h3>
+              <p className="text-muted-foreground">
+                Discover AI-powered tools like Lovable, Replit, and more to supercharge your coding.
               </p>
             </Card>
           </a>
