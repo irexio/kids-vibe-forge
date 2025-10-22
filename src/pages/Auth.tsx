@@ -6,6 +6,18 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Code2 } from "lucide-react";
+import { z } from "zod";
+
+const authSchema = z.object({
+  email: z.string().trim().email("Invalid email address").max(255, "Email too long"),
+  password: z.string().min(6, "Password must be at least 6 characters").max(72, "Password too long"),
+  displayName: z.string()
+    .trim()
+    .min(3, "Display name must be at least 3 characters")
+    .max(30, "Display name must be less than 30 characters")
+    .regex(/^[a-zA-Z0-9_-]+$/, "Display name can only contain letters, numbers, underscores, and hyphens")
+    .optional()
+});
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -20,22 +32,42 @@ const Auth = () => {
     setLoading(true);
 
     try {
+      // Validate input
+      const validationResult = authSchema.safeParse({
+        email,
+        password,
+        displayName: isLogin ? undefined : displayName
+      });
+
+      if (!validationResult.success) {
+        const firstError = validationResult.error.errors[0];
+        toast.error(firstError.message);
+        setLoading(false);
+        return;
+      }
+
       if (isLogin) {
         const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
+          email: validationResult.data.email,
+          password: validationResult.data.password,
         });
 
         if (error) throw error;
         toast.success("Welcome back!");
         navigate("/community");
       } else {
+        if (!validationResult.data.displayName) {
+          toast.error("Display name is required");
+          setLoading(false);
+          return;
+        }
+
         const { error } = await supabase.auth.signUp({
-          email,
-          password,
+          email: validationResult.data.email,
+          password: validationResult.data.password,
           options: {
             data: {
-              display_name: displayName,
+              display_name: validationResult.data.displayName,
             },
             emailRedirectTo: `${window.location.origin}/`,
           },

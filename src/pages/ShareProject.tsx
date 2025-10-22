@@ -10,6 +10,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { X } from "lucide-react";
+import { z } from "zod";
+
+const projectSchema = z.object({
+  title: z.string().trim().min(1, "Title is required").max(100, "Title must be less than 100 characters"),
+  description: z.string().trim().min(1, "Description is required").max(1000, "Description must be less than 1000 characters"),
+  project_url: z.string().trim().url("Invalid URL format").optional().or(z.literal("")),
+  youtube_url: z.string().trim().url("Invalid URL format").optional().or(z.literal("")),
+  tags: z.array(z.string().trim().min(1).max(20, "Tag must be less than 20 characters")).max(10, "Maximum 10 tags allowed")
+});
 
 const ShareProject = () => {
   const [user, setUser] = useState<any>(null);
@@ -42,10 +51,29 @@ const ShareProject = () => {
   }, [navigate]);
 
   const addTag = () => {
-    if (currentTag.trim() && !tags.includes(currentTag.trim())) {
-      setTags([...tags, currentTag.trim()]);
-      setCurrentTag("");
+    const trimmedTag = currentTag.trim();
+    
+    if (!trimmedTag) {
+      return;
     }
+
+    if (trimmedTag.length > 20) {
+      toast.error("Tag must be less than 20 characters");
+      return;
+    }
+
+    if (tags.length >= 10) {
+      toast.error("Maximum 10 tags allowed");
+      return;
+    }
+
+    if (tags.includes(trimmedTag)) {
+      toast.error("Tag already added");
+      return;
+    }
+
+    setTags([...tags, trimmedTag]);
+    setCurrentTag("");
   };
 
   const removeTag = (tagToRemove: string) => {
@@ -60,28 +88,41 @@ const ShareProject = () => {
       return;
     }
 
-    if (!title.trim() || !description.trim()) {
-      toast.error("Please fill in all required fields");
-      return;
-    }
-
-    if (!projectUrl && !youtubeUrl) {
-      toast.error("Please provide at least a project URL or YouTube link");
-      return;
-    }
-
     setLoading(true);
 
     try {
+      // Validate input
+      const validationResult = projectSchema.safeParse({
+        title,
+        description,
+        project_url: projectUrl,
+        youtube_url: youtubeUrl,
+        tags
+      });
+
+      if (!validationResult.success) {
+        const firstError = validationResult.error.errors[0];
+        toast.error(firstError.message);
+        setLoading(false);
+        return;
+      }
+
+      // Ensure at least one URL is provided
+      if (!validationResult.data.project_url && !validationResult.data.youtube_url) {
+        toast.error("Please provide at least a project URL or YouTube link");
+        setLoading(false);
+        return;
+      }
+
       const { error } = await supabase
         .from("community_projects")
         .insert({
           user_id: user.id,
-          title: title.trim(),
-          description: description.trim(),
-          project_url: projectUrl.trim() || null,
-          youtube_url: youtubeUrl.trim() || null,
-          tags,
+          title: validationResult.data.title,
+          description: validationResult.data.description,
+          project_url: validationResult.data.project_url || null,
+          youtube_url: validationResult.data.youtube_url || null,
+          tags: validationResult.data.tags,
           status: "pending"
         });
 
@@ -90,8 +131,10 @@ const ShareProject = () => {
       toast.success("Project submitted! It will be reviewed by moderators.");
       navigate("/community");
     } catch (error: any) {
-      toast.error(error.message || "Failed to submit project");
-      console.error(error);
+      toast.error("Failed to submit project. Please try again.");
+      if (import.meta.env.DEV) {
+        console.error(error);
+      }
     } finally {
       setLoading(false);
     }
