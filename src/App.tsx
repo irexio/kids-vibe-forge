@@ -16,6 +16,7 @@ import Forums from "./pages/Forums";
 import QA from "./pages/QA";
 import Tutorials from "./pages/Tutorials";
 import TutorialDetail from "./pages/TutorialDetail";
+import LearningStyle from "./pages/LearningStyle";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/qa" element={<QA />} />
           <Route path="/tutorials" element={<Tutorials />} />
           <Route path="/tutorials/:slug" element={<TutorialDetail />} />
+          <Route path="/learning-style" element={<LearningStyle />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
