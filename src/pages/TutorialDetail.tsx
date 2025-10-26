@@ -248,7 +248,7 @@ const TutorialDetail = () => {
                     </ul>
                     <Button onClick={() => navigate('/#pricing')}>
                       <Crown className="w-4 h-4 mr-2" />
-                      Upgrade to Premium - $9.99/month
+                      Upgrade to Premium - $14.99/month
                     </Button>
                   </CardContent>
                 </>
