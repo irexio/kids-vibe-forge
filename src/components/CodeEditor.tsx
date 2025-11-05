@@ -54,7 +54,7 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
             <div className="flex gap-2">
               <Button 
                 size="sm" 
-                variant="outline" 
+                variant="secondary" 
                 onClick={() => setShowHelper(!showHelper)}
               >
                 <Sparkles className="w-4 h-4 mr-1" />
