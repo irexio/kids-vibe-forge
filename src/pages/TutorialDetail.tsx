@@ -3,11 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CodeEditor from "@/components/CodeEditor";
+import SandboxGuide from "@/components/SandboxGuide";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Lock, Sparkles, Crown, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, Lock, Sparkles, Crown, ChevronLeft, ChevronRight, BookOpen, Code } from "lucide-react";
 import { toast } from "sonner";
 import ReactMarkdown from "react-markdown";
 
@@ -31,6 +32,8 @@ const TutorialDetail = () => {
   const [userRole, setUserRole] = useState<string>('free');
   const [currentStep, setCurrentStep] = useState(0);
   const [steps, setSteps] = useState<string[]>([]);
+  const [showGuide, setShowGuide] = useState(false);
+  const [showSandbox, setShowSandbox] = useState(false);
 
   useEffect(() => {
     fetchTutorial();
@@ -152,7 +155,53 @@ const TutorialDetail = () => {
             <p className="text-xl text-muted-foreground">{tutorial.description}</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Choice Buttons - Show only when sandbox is not visible */}
+          {!showSandbox && (
+            <div className="mb-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button 
+                size="lg" 
+                variant="default"
+                onClick={() => {
+                  setShowGuide(true);
+                  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                }}
+                className="w-full sm:w-auto"
+              >
+                <BookOpen className="w-5 h-5 mr-2" />
+                Read Instructions
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => {
+                  setShowSandbox(true);
+                  setTimeout(() => {
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                  }, 100);
+                }}
+                className="w-full sm:w-auto"
+              >
+                <Code className="w-5 h-5 mr-2" />
+                Jump to Sandbox
+              </Button>
+            </div>
+          )}
+
+          {/* Sandbox Guide */}
+          {showGuide && !showSandbox && (
+            <div className="mb-8">
+              <SandboxGuide onStartCoding={() => {
+                setShowSandbox(true);
+                setTimeout(() => {
+                  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                }, 100);
+              }} />
+            </div>
+          )}
+
+          {/* Sandbox Section - Only show when activated */}
+          {showSandbox && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Instructions Panel */}
             <Card className="h-[600px] flex flex-col">
               <CardHeader className="border-b">
@@ -210,6 +259,7 @@ const TutorialDetail = () => {
               </CardContent>
             </Card>
           </div>
+          )}
 
           {/* Premium Content */}
           {tutorial.paid_content && (

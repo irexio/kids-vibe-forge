@@ -58,7 +58,7 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
                 onClick={() => setShowHelper(!showHelper)}
               >
                 <Sparkles className="w-4 h-4 mr-1" />
-                {showHelper ? "Hide" : "AI Help"}
+                {showHelper ? "Hide Bot" : "Code Assist Bot"}
               </Button>
               <Button size="sm" variant="outline" onClick={resetCode}>
                 <RotateCcw className="w-4 h-4 mr-1" />
