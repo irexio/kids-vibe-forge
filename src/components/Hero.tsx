@@ -31,7 +31,7 @@ const Hero = () => {
         </p>
         
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
-          Your digital companion for learning to code. Interactive ebooks designed for tweens and beginners aged 11-17.
+          Interactive tools and resources designed to help tweens, teens, and beginners of all ages advance their coding success.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
