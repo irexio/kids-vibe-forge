@@ -73,7 +73,7 @@ const Tutorials = () => {
           ) : (
             <div className="flex gap-6">
               {/* Main Content - Tutorials Grid */}
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {tutorials.map((tutorial) => (
                   <Card 
                     key={tutorial.id}
@@ -112,7 +112,7 @@ const Tutorials = () => {
               </div>
 
               {/* Premium Sidebar */}
-              <div className="hidden lg:block w-80">
+              <div className="hidden xl:block w-96 flex-shrink-0">
                 <Card className="sticky top-24 bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
