@@ -71,9 +71,9 @@ const Tutorials = () => {
               <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto"></div>
             </div>
           ) : (
-            <div className="flex gap-6">
-              {/* Main Content - Tutorials Grid */}
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <>
+              {/* Tutorials Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
                 {tutorials.map((tutorial) => (
                   <Card 
                     key={tutorial.id}
@@ -111,38 +111,49 @@ const Tutorials = () => {
                 ))}
               </div>
 
-              {/* Premium Sidebar */}
-              <div className="hidden xl:block w-96 flex-shrink-0">
-                <Card className="sticky top-24 bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Crown className="w-5 h-5 text-primary" />
-                      Premium Content
-                    </CardTitle>
-                    <CardDescription>
-                      Upgrade to Vibe Creator Club to unlock advanced features!
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-4 font-semibold">Get access to:</p>
-                    <ul className="list-disc list-inside space-y-2 mb-6 text-sm">
-                      <li>Advanced animations and effects</li>
-                      <li>Interactive features and controls</li>
-                      <li>Custom image uploads</li>
-                      <li>Unlimited project saves</li>
-                      <li>Community gallery publishing</li>
+              {/* Premium Box - Full Width */}
+              <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
+                <CardHeader className="text-center">
+                  <CardTitle className="flex items-center justify-center gap-2 text-2xl">
+                    <Crown className="w-6 h-6 text-primary" />
+                    Unlock Premium Content
+                  </CardTitle>
+                  <CardDescription className="text-base">
+                    Upgrade to Vibe Creator Club to unlock advanced features!
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="flex-1">
+                    <p className="mb-3 font-semibold">Get access to:</p>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                      <li className="flex items-center gap-2">
+                        <span className="text-primary">✓</span> Advanced animations and effects
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-primary">✓</span> Interactive features and controls
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-primary">✓</span> Custom image uploads
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-primary">✓</span> Unlimited project saves
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-primary">✓</span> Community gallery publishing
+                      </li>
                     </ul>
-                    <Button 
-                      className="w-full"
-                      onClick={() => navigate('/#pricing')}
-                    >
-                      <Crown className="w-4 h-4 mr-2" />
-                      Upgrade - $14.99/month
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+                  </div>
+                  <Button 
+                    size="lg"
+                    className="md:w-auto w-full"
+                    onClick={() => navigate('/#pricing')}
+                  >
+                    <Crown className="w-5 h-5 mr-2" />
+                    Upgrade - $14.99/month
+                  </Button>
+                </CardContent>
+              </Card>
+            </>
           )}
         </div>
       </section>
