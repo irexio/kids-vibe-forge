@@ -261,50 +261,6 @@ const TutorialDetail = () => {
           </div>
           )}
 
-          {/* Premium Content */}
-          {tutorial.paid_content && (
-            <Card className="mt-6">
-              {isPremiumUser ? (
-                <>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Crown className="w-5 h-5 text-primary" />
-                      Premium Enhancements
-                    </CardTitle>
-                    <CardDescription>
-                      Take your project to the next level with these advanced features
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                    <ReactMarkdown>{tutorial.paid_content}</ReactMarkdown>
-                  </CardContent>
-                </>
-              ) : (
-                <>
-                  <CardHeader>
-                    <CardTitle>🔒 Premium Content</CardTitle>
-                    <CardDescription>
-                      Upgrade to Vibe Creator Club to unlock advanced features!
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-4">Get access to:</p>
-                    <ul className="list-disc list-inside space-y-2 mb-6">
-                      <li>Advanced animations and effects</li>
-                      <li>Interactive features and controls</li>
-                      <li>Custom image uploads</li>
-                      <li>Unlimited project saves</li>
-                      <li>Community gallery publishing</li>
-                    </ul>
-                    <Button onClick={() => navigate('/#pricing')}>
-                      <Crown className="w-4 h-4 mr-2" />
-                      Upgrade to Premium - $14.99/month
-                    </Button>
-                  </CardContent>
-                </>
-              )}
-            </Card>
-          )}
         </div>
       </section>
 
