@@ -50,7 +50,7 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
         {/* Code Editor */}
         <div className="flex-1 flex flex-col border-b border-border relative z-10 overflow-hidden" style={{ pointerEvents: 'auto' }}>
           <div className="bg-muted px-4 py-2 flex flex-col gap-2 border-b border-border">
-            <div className="flex gap-2 justify-end">
+            <div className="flex gap-2 justify-between">
               <Button 
                 size="sm" 
                 variant="secondary" 
