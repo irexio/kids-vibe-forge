@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, RotateCcw } from "lucide-react";
+import { Play, RotateCcw, Sparkles } from "lucide-react";
+import CodeHelper from "./CodeHelper";
 
 interface CodeEditorProps {
   starterCode: string;
@@ -11,6 +12,7 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
   const [code, setCode] = useState<string>(starterCode ?? "");
   const [output, setOutput] = useState("");
   const [iframeSrc, setIframeSrc] = useState("");
+  const [showHelper, setShowHelper] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
@@ -42,22 +44,32 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
   };
 
   return (
-    <div className="h-full flex flex-col" style={{ pointerEvents: 'auto' }}>
-      {/* Code Editor */}
-      <div className="flex-1 flex flex-col border-b border-border relative z-10 overflow-hidden" style={{ pointerEvents: 'auto' }}>
-        <div className="bg-muted px-4 py-2 flex items-center justify-between border-b border-border">
-          <span className="text-sm font-semibold">Type Your Code Below between &lt;script&gt; and &lt;/script&gt;</span>
-          <div className="flex gap-2">
-            <Button size="sm" variant="outline" onClick={resetCode}>
-              <RotateCcw className="w-4 h-4 mr-1" />
-              Reset
-            </Button>
-            <Button size="sm" onClick={runCode}>
-              <Play className="w-4 h-4 mr-1" />
-              Run
-            </Button>
+    <div className="h-full flex" style={{ pointerEvents: 'auto' }}>
+      {/* Main Editor Area */}
+      <div className={`flex-1 flex flex-col ${showHelper ? 'border-r border-border' : ''}`}>
+        {/* Code Editor */}
+        <div className="flex-1 flex flex-col border-b border-border relative z-10 overflow-hidden" style={{ pointerEvents: 'auto' }}>
+          <div className="bg-muted px-4 py-2 flex items-center justify-between border-b border-border">
+            <span className="text-sm font-semibold">Type Your Code Below between &lt;script&gt; and &lt;/script&gt;</span>
+            <div className="flex gap-2">
+              <Button 
+                size="sm" 
+                variant="outline" 
+                onClick={() => setShowHelper(!showHelper)}
+              >
+                <Sparkles className="w-4 h-4 mr-1" />
+                {showHelper ? "Hide" : "AI Help"}
+              </Button>
+              <Button size="sm" variant="outline" onClick={resetCode}>
+                <RotateCcw className="w-4 h-4 mr-1" />
+                Reset
+              </Button>
+              <Button size="sm" onClick={runCode}>
+                <Play className="w-4 h-4 mr-1" />
+                Run
+              </Button>
+            </div>
           </div>
-        </div>
         <textarea
           value={code ?? ""}
           onChange={(e) => setCode(e.target.value)}
@@ -76,19 +88,27 @@ const CodeEditor = ({ starterCode, onRun }: CodeEditorProps) => {
         )}
       </div>
 
-      {/* Output Preview */}
-      <div className="flex-1 flex flex-col relative z-0" >
-        <div className="bg-muted px-4 py-2 border-b border-border">
-          <span className="text-sm font-semibold">Your Creation</span>
+        {/* Output Preview */}
+        <div className="flex-1 flex flex-col relative z-0">
+          <div className="bg-muted px-4 py-2 border-b border-border">
+            <span className="text-sm font-semibold">Your Creation</span>
+          </div>
+          <iframe
+            ref={iframeRef}
+            srcDoc={iframeSrc}
+            className="flex-1 bg-white"
+            sandbox="allow-scripts"
+            title="Code Output"
+          />
         </div>
-        <iframe
-          ref={iframeRef}
-          srcDoc={iframeSrc}
-          className="flex-1 bg-white"
-          sandbox="allow-scripts"
-          title="Code Output"
-        />
       </div>
+
+      {/* AI Helper Sidebar */}
+      {showHelper && (
+        <div className="w-96 h-full">
+          <CodeHelper onClose={() => setShowHelper(false)} />
+        </div>
+      )}
     </div>
   );
 };
